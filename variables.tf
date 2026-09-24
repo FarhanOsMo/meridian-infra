@@ -5,9 +5,14 @@ variable "aws_region" {
 }
 
 variable "environment" {
-  description = "Environment name used to tag and namespace resources (e.g. dev, staging, prod)"
+  description = "Environment name used to tag and namespace resources (dev, staging, or production)"
   type        = string
   default     = "dev"
+
+  validation {
+    condition     = contains(["dev", "staging", "production"], var.environment)
+    error_message = "environment must be one of: dev, staging, production."
+  }
 }
 
 variable "vpc_cidr" {
