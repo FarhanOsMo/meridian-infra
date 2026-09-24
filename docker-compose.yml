@@ -1,0 +1,12 @@
+services:
+  localstack:
+    # Pinned to the community edition. The "latest" tag now requires a paid
+    # LOCALSTACK_AUTH_TOKEN and refuses to start without one.
+    image: localstack/localstack:3.8
+    container_name: localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=ec2,s3,sts,iam
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
